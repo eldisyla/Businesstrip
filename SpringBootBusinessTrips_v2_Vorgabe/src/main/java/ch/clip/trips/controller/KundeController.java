@@ -2,7 +2,7 @@ package ch.clip.trips.controller;
 
 import ch.clip.trips.ex.EntityNotFoundException;
 import ch.clip.trips.model.Kunde;
-import ch.clip.trips.repo.KundeRepo;
+import ch.clip.trips.repo.KundeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,38 +10,41 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/kunden")
-@CrossOrigin(origins = "*")
+@CrossOrigin
 public class KundeController {
 
     @Autowired
-    private KundeRepo repo;
+    private KundeRepository kundeRepository;
 
     @GetMapping
     public List<Kunde> getAll() {
-        return repo.findAll();
+        return kundeRepository.findAll();
     }
 
     @GetMapping("/{id}")
     public Kunde getById(@PathVariable Long id) {
-        return repo.findById(id).orElseThrow(() -> new EntityNotFoundException("Kunde", id));
+        return kundeRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Kunde", id));
     }
 
     @PostMapping
-    public Kunde create(@RequestBody Kunde entity) {
-        return repo.save(entity);
+    public Kunde create(@RequestBody Kunde kunde) {
+        return kundeRepository.save(kunde);
     }
 
     @PutMapping("/{id}")
-    public Kunde update(@RequestBody Kunde updated, @PathVariable Long id) {
-        return repo.findById(id).map(e -> {
-            e.setName(updated.getName());
-            return repo.save(e);
+    public Kunde update(@PathVariable Long id, @RequestBody Kunde updated) {
+        return kundeRepository.findById(id).map(k -> {
+            k.setVorname(updated.getVorname());
+            k.setNachname(updated.getNachname());
+            k.setEmail(updated.getEmail());
+            k.setTelefon(updated.getTelefon());
+            return kundeRepository.save(k);
         }).orElseThrow(() -> new EntityNotFoundException("Kunde", id));
     }
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
-        if (!repo.existsById(id)) throw new EntityNotFoundException("Kunde", id);
-        repo.deleteById(id);
+        kundeRepository.deleteById(id);
     }
 }

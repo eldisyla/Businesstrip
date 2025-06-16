@@ -13,7 +13,7 @@ public class Leistung implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer leistungId;
+    private Long leistungId;
 
     private String bezeichnung;
     private String typ;
@@ -28,7 +28,7 @@ public class Leistung implements Serializable {
 
     public Leistung() {}
 
-    public Leistung(Integer leistungId, String bezeichnung, String typ, Hotel hotel, Mitarbeiter mitarbeiter) {
+    public Leistung(Long leistungId, String bezeichnung, String typ, Hotel hotel, Mitarbeiter mitarbeiter) {
         this.leistungId = leistungId;
         this.bezeichnung = bezeichnung;
         this.typ = typ;

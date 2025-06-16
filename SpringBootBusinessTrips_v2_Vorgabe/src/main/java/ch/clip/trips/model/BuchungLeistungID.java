@@ -12,12 +12,12 @@ public class BuchungLeistungId implements Serializable {
 
     private static final long serialVersionUID = 7L;
 
-    private Integer buchungId;
-    private Integer leistungId;
+    private Long buchungId;
+    private Long leistungId;
 
     public BuchungLeistungId() {}
 
-    public BuchungLeistungId(Integer buchungId, Integer leistungId) {
+    public BuchungLeistungId(Long buchungId, Long leistungId) {
         this.buchungId = buchungId;
         this.leistungId = leistungId;
     }
@@ -28,7 +28,7 @@ public class BuchungLeistungId implements Serializable {
         if (!(o instanceof BuchungLeistungId)) return false;
         BuchungLeistungId that = (BuchungLeistungId) o;
         return Objects.equals(buchungId, that.buchungId) &&
-               Objects.equals(leistungId, that.leistungId);
+                Objects.equals(leistungId, that.leistungId);
     }
 
     @Override

@@ -2,7 +2,7 @@ package ch.clip.trips.controller;
 
 import ch.clip.trips.ex.EntityNotFoundException;
 import ch.clip.trips.model.Leistung;
-import ch.clip.trips.repo.LeistungRepo;
+import ch.clip.trips.repo.LeistungRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,38 +10,41 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/leistungen")
-@CrossOrigin(origins = "*")
+@CrossOrigin
 public class LeistungController {
 
     @Autowired
-    private LeistungRepo repo;
+    private LeistungRepository leistungRepository;
 
     @GetMapping
     public List<Leistung> getAll() {
-        return repo.findAll();
+        return leistungRepository.findAll();
     }
 
     @GetMapping("/{id}")
     public Leistung getById(@PathVariable Long id) {
-        return repo.findById(id).orElseThrow(() -> new EntityNotFoundException("Leistung", id));
+        return leistungRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Leistung", id));
     }
 
     @PostMapping
-    public Leistung create(@RequestBody Leistung entity) {
-        return repo.save(entity);
+    public Leistung create(@RequestBody Leistung leistung) {
+        return leistungRepository.save(leistung);
     }
 
     @PutMapping("/{id}")
-    public Leistung update(@RequestBody Leistung updated, @PathVariable Long id) {
-        return repo.findById(id).map(e -> {
-            e.setBeschreibung(updated.getBeschreibung());
-            return repo.save(e);
+    public Leistung update(@RequestBody Leistung neueLeistung, @PathVariable Long id) {
+        return leistungRepository.findById(id).map(l -> {
+            l.setBezeichnung(neueLeistung.getBezeichnung());
+            l.setTyp(neueLeistung.getTyp());
+            l.setHotel(neueLeistung.getHotel());
+            l.setMitarbeiter(neueLeistung.getMitarbeiter());
+            return leistungRepository.save(l);
         }).orElseThrow(() -> new EntityNotFoundException("Leistung", id));
     }
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
-        if (!repo.existsById(id)) throw new EntityNotFoundException("Leistung", id);
-        repo.deleteById(id);
+        leistungRepository.deleteById(id);
     }
 }

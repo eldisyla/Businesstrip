@@ -14,7 +14,7 @@ public class Hotel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer hotelId;
+    private Long hotelId;
 
     private String name;
     private String ort;
@@ -26,7 +26,7 @@ public class Hotel implements Serializable {
 
     public Hotel() {}
 
-    public Hotel(Integer hotelId, String name, String ort, Integer sterne, String kontaktEmail) {
+    public Hotel(Long hotelId, String name, String ort, Integer sterne, String kontaktEmail) {
         this.hotelId = hotelId;
         this.name = name;
         this.ort = ort;
