@@ -17,7 +17,7 @@ public class Kunde implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer kundeId;
+    private Long kundeId;
 
     private String vorname;
     private String nachname;
@@ -30,16 +30,20 @@ public class Kunde implements Serializable {
 
     @ManyToMany
     @JoinTable(
-        name = "Mitreisende",
-        joinColumns = @JoinColumn(name = "kunde_id"),
-        inverseJoinColumns = @JoinColumn(name = "mitreisender_id")
+            name = "Mitreisende",
+            joinColumns = @JoinColumn(name = "kunde_id"),
+            inverseJoinColumns = @JoinColumn(name = "mitreisender_id")
     )
     @JsonManagedReference
     private List<Kunde> mitreisende;
 
+    @ManyToMany(mappedBy = "mitreisende")
+    @JsonBackReference
+    private List<Kunde> hauptkunden;
+
     public Kunde() {}
 
-    public Kunde(Integer kundeId, String vorname, String nachname, String email, String telefon) {
+    public Kunde(Long kundeId, String vorname, String nachname, String email, String telefon) {
         this.kundeId = kundeId;
         this.vorname = vorname;
         this.nachname = nachname;

@@ -14,7 +14,7 @@ public class Mitarbeiter implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer mitarbeiterId;
+    private Long mitarbeiterId;
 
     private String name;
     private String rolle;
@@ -24,7 +24,7 @@ public class Mitarbeiter implements Serializable {
 
     public Mitarbeiter() {}
 
-    public Mitarbeiter(Integer mitarbeiterId, String name, String rolle) {
+    public Mitarbeiter(Long mitarbeiterId, String name, String rolle) {
         this.mitarbeiterId = mitarbeiterId;
         this.name = name;
         this.rolle = rolle;

@@ -33,9 +33,12 @@ public class BuchungController {
     }
 
     @PutMapping("/{id}")
-    public Buchung update(@RequestBody Buchung newBuchung, @PathVariable Long id) {
+    public Buchung update(@PathVariable Long id, @RequestBody Buchung newBuchung) {
         return buchungRepository.findById(id).map(b -> {
-            b.setDatum(newBuchung.getDatum());
+            b.setBuchungsdatum(newBuchung.getBuchungsdatum());
+            b.setGesamtpreis(newBuchung.getGesamtpreis());
+            b.setReise(newBuchung.getReise());
+            b.setKunde(newBuchung.getKunde());
             return buchungRepository.save(b);
         }).orElseThrow(() -> new EntityNotFoundException("Buchung", id));
     }

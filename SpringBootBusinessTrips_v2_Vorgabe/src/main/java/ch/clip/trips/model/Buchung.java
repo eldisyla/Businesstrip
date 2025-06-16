@@ -18,7 +18,7 @@ public class Buchung implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer buchungId;
+    private Long buchungId;
 
     @ManyToOne
     @JoinColumn(name = "kunde_id")
@@ -37,7 +37,7 @@ public class Buchung implements Serializable {
 
     public Buchung() {}
 
-    public Buchung(Integer buchungId, Kunde kunde, Reise reise, LocalDate buchungsdatum, BigDecimal gesamtpreis) {
+    public Buchung(Long buchungId, Kunde kunde, Reise reise, LocalDate buchungsdatum, BigDecimal gesamtpreis) {
         this.buchungId = buchungId;
         this.kunde = kunde;
         this.reise = reise;
@@ -45,8 +45,33 @@ public class Buchung implements Serializable {
         this.gesamtpreis = gesamtpreis;
     }
 
+    public Long getBuchungId() {
+        return buchungId;
+    }
+
+    public Kunde getKunde() {
+        return kunde;
+    }
+
+    public Reise getReise() {
+        return reise;
+    }
+
+    public LocalDate getBuchungsdatum() {
+        return buchungsdatum;
+    }
+
+    public BigDecimal getGesamtpreis() {
+        return gesamtpreis;
+    }
+
+    public List<BuchungLeistung> getLeistungen() {
+        return leistungen;
+    }
+
     @Override
     public String toString() {
-        return "Buchung [id=" + buchungId + ", kunde=" + kunde.getNachname() + "]";
+        return "Buchung [id=" + buchungId + ", kunde=" +
+                (kunde != null ? kunde.getNachname() : "null") + "]";
     }
 }

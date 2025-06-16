@@ -2,7 +2,7 @@ package ch.clip.trips.controller;
 
 import ch.clip.trips.ex.EntityNotFoundException;
 import ch.clip.trips.model.Hotel;
-import ch.clip.trips.repo.HotelRepo;
+import ch.clip.trips.repo.HotelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,38 +10,41 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/hotels")
-@CrossOrigin(origins = "*")
+@CrossOrigin
 public class HotelController {
 
     @Autowired
-    private HotelRepo repo;
+    private HotelRepository hotelRepository;
 
     @GetMapping
     public List<Hotel> getAll() {
-        return repo.findAll();
+        return hotelRepository.findAll();
     }
 
     @GetMapping("/{id}")
     public Hotel getById(@PathVariable Long id) {
-        return repo.findById(id).orElseThrow(() -> new EntityNotFoundException("Hotel", id));
+        return hotelRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Hotel", id));
     }
 
     @PostMapping
-    public Hotel create(@RequestBody Hotel entity) {
-        return repo.save(entity);
+    public Hotel create(@RequestBody Hotel hotel) {
+        return hotelRepository.save(hotel);
     }
 
     @PutMapping("/{id}")
-    public Hotel update(@RequestBody Hotel updated, @PathVariable Long id) {
-        return repo.findById(id).map(e -> {
-            e.setName(updated.getName());
-            return repo.save(e);
+    public Hotel update(@PathVariable Long id, @RequestBody Hotel updated) {
+        return hotelRepository.findById(id).map(h -> {
+            h.setName(updated.getName());
+            h.setOrt(updated.getOrt());
+            h.setSterne(updated.getSterne());
+            h.setKontaktEmail(updated.getKontaktEmail());
+            return hotelRepository.save(h);
         }).orElseThrow(() -> new EntityNotFoundException("Hotel", id));
     }
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
-        if (!repo.existsById(id)) throw new EntityNotFoundException("Hotel", id);
-        repo.deleteById(id);
+        hotelRepository.deleteById(id);
     }
 }

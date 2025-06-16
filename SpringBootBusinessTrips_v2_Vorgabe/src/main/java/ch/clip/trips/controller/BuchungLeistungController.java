@@ -1,42 +1,56 @@
 package ch.clip.trips.controller;
 
 import ch.clip.trips.ex.EntityNotFoundException;
+import ch.clip.trips.model.Buchung;
 import ch.clip.trips.model.BuchungLeistung;
 import ch.clip.trips.model.BuchungLeistungId;
-import ch.clip.trips.repo.BuchungLeistungRepo;
+import ch.clip.trips.model.Leistung;
+import ch.clip.trips.repo.BuchungLeistungRepository;
+import ch.clip.trips.repo.BuchungRepository;
+import ch.clip.trips.repo.LeistungRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/buchungsleistungen")
+@RequestMapping("/api/buchung-leistungen")
 @CrossOrigin
 public class BuchungLeistungController {
 
     @Autowired
-    private BuchungLeistungRepo buchungLeistungRepo;
+    private BuchungLeistungRepository buchungLeistungRepository;
+
+    @Autowired
+    private BuchungRepository buchungRepository;
+
+    @Autowired
+    private LeistungRepository leistungRepository;
 
     @GetMapping
     public List<BuchungLeistung> getAll() {
-        return buchungLeistungRepo.findAll();
+        return buchungLeistungRepository.findAll();
     }
 
-    @GetMapping("/{buchungId}/{leistungId}")
-    public BuchungLeistung getById(@PathVariable Integer buchungId, @PathVariable Integer leistungId) {
+    @PostMapping("/{buchungId}/{leistungId}")
+    public BuchungLeistung addLeistungToBuchung(@PathVariable Long buchungId, @PathVariable Long leistungId) {
+        Buchung buchung = buchungRepository.findById(buchungId)
+                .orElseThrow(() -> new EntityNotFoundException("Buchung", buchungId));
+        Leistung leistung = leistungRepository.findById(leistungId)
+                .orElseThrow(() -> new EntityNotFoundException("Leistung", leistungId));
+
         BuchungLeistungId id = new BuchungLeistungId(buchungId, leistungId);
-        return buchungLeistungRepo.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("BuchungLeistung", id));
-    }
+        BuchungLeistung bl = new BuchungLeistung();
+        bl.setId(id);
+        bl.setBuchung(buchung);
+        bl.setLeistung(leistung);
 
-    @PostMapping
-    public BuchungLeistung create(@RequestBody BuchungLeistung buchungLeistung) {
-        return buchungLeistungRepo.save(buchungLeistung);
+        return buchungLeistungRepository.save(bl);
     }
 
     @DeleteMapping("/{buchungId}/{leistungId}")
-    public void delete(@PathVariable Integer buchungId, @PathVariable Integer leistungId) {
+    public void delete(@PathVariable Long buchungId, @PathVariable Long leistungId) {
         BuchungLeistungId id = new BuchungLeistungId(buchungId, leistungId);
-        buchungLeistungRepo.deleteById(id);
+        buchungLeistungRepository.deleteById(id);
     }
 }

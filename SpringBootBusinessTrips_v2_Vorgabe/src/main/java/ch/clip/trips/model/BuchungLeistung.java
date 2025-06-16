@@ -34,7 +34,10 @@ public class BuchungLeistung implements Serializable {
     public BuchungLeistung() {}
 
     public BuchungLeistung(Buchung buchung, Leistung leistung, Integer anzahl, BigDecimal einzelpreis) {
-        this.id = new BuchungLeistungId(buchung.getBuchungId(), leistung.getLeistungId());
+        this.id = new BuchungLeistungId(
+                buchung.getBuchungId(),
+                leistung.getLeistungId()
+        );
         this.buchung = buchung;
         this.leistung = leistung;
         this.anzahl = anzahl;
@@ -43,6 +46,7 @@ public class BuchungLeistung implements Serializable {
 
     @Override
     public String toString() {
-        return "BuchungLeistung [buchung=" + buchung.getBuchungId() + ", leistung=" + leistung.getLeistungId() + "]";
+        return "BuchungLeistung [buchung=" + buchung.getBuchungId() +
+                ", leistung=" + leistung.getLeistungId() + "]";
     }
 }
