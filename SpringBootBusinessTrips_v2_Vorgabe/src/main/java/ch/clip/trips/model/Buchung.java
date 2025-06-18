@@ -1,14 +1,13 @@
 package ch.clip.trips.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
+import lombok.Data;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
-
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
-import jakarta.persistence.*;
-import lombok.Data;
 
 @Data
 @Entity
@@ -29,13 +28,16 @@ public class Buchung implements Serializable {
     private Reise reise;
 
     private LocalDate buchungsdatum;
+
     private BigDecimal gesamtpreis;
 
     @OneToMany(mappedBy = "buchung")
     @JsonManagedReference
     private List<BuchungLeistung> leistungen;
 
-    public Buchung() {}
+    public Buchung() {
+        // Standardkonstruktor für JPA
+    }
 
     public Buchung(Long buchungId, Kunde kunde, Reise reise, LocalDate buchungsdatum, BigDecimal gesamtpreis) {
         this.buchungId = buchungId;
@@ -45,33 +47,8 @@ public class Buchung implements Serializable {
         this.gesamtpreis = gesamtpreis;
     }
 
-    public Long getBuchungId() {
-        return buchungId;
-    }
-
-    public Kunde getKunde() {
-        return kunde;
-    }
-
-    public Reise getReise() {
-        return reise;
-    }
-
-    public LocalDate getBuchungsdatum() {
-        return buchungsdatum;
-    }
-
-    public BigDecimal getGesamtpreis() {
-        return gesamtpreis;
-    }
-
-    public List<BuchungLeistung> getLeistungen() {
-        return leistungen;
-    }
-
     @Override
     public String toString() {
-        return "Buchung [id=" + buchungId + ", kunde=" +
-                (kunde != null ? kunde.getNachname() : "null") + "]";
+        return "Buchung [buchungId=" + buchungId + ", kunde=" + kunde + ", reise=" + reise + "]";
     }
 }

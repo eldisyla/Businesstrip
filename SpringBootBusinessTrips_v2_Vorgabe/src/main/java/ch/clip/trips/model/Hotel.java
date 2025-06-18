@@ -1,10 +1,10 @@
 package ch.clip.trips.model;
 
-import java.io.Serializable;
-import java.util.List;
-
 import jakarta.persistence.*;
 import lombok.Data;
+
+import java.io.Serializable;
+import java.util.List;
 
 @Data
 @Entity
@@ -24,7 +24,9 @@ public class Hotel implements Serializable {
     @OneToMany(mappedBy = "hotel")
     private List<Leistung> leistungen;
 
-    public Hotel() {}
+    public Hotel() {
+        // Standard-Konstruktor für JPA
+    }
 
     public Hotel(Long hotelId, String name, String ort, Integer sterne, String kontaktEmail) {
         this.hotelId = hotelId;

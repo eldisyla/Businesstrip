@@ -1,10 +1,10 @@
 package ch.clip.trips.model;
 
-import java.io.Serializable;
-import java.util.List;
-
 import jakarta.persistence.*;
 import lombok.Data;
+
+import java.io.Serializable;
+import java.util.List;
 
 @Data
 @Entity
@@ -22,7 +22,9 @@ public class Mitarbeiter implements Serializable {
     @OneToMany(mappedBy = "mitarbeiter")
     private List<Leistung> leistungen;
 
-    public Mitarbeiter() {}
+    public Mitarbeiter() {
+        // Standardkonstruktor für JPA
+    }
 
     public Mitarbeiter(Long mitarbeiterId, String name, String rolle) {
         this.mitarbeiterId = mitarbeiterId;
@@ -32,6 +34,6 @@ public class Mitarbeiter implements Serializable {
 
     @Override
     public String toString() {
-        return "Mitarbeiter [id=" + mitarbeiterId + ", name=" + name + "]";
+        return "Mitarbeiter [mitarbeiterId=" + mitarbeiterId + ", name=" + name + "]";
     }
 }

@@ -1,9 +1,10 @@
 package ch.clip.trips.model;
 
-import java.io.Serializable;
-
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
+
+import java.io.Serializable;
 
 @Data
 @Entity
@@ -20,13 +21,17 @@ public class Leistung implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "hotel_id")
+    @JsonBackReference
     private Hotel hotel;
 
     @ManyToOne
     @JoinColumn(name = "mitarbeiter_id")
+    @JsonBackReference
     private Mitarbeiter mitarbeiter;
 
-    public Leistung() {}
+    public Leistung() {
+        // Standardkonstruktor für JPA
+    }
 
     public Leistung(Long leistungId, String bezeichnung, String typ, Hotel hotel, Mitarbeiter mitarbeiter) {
         this.leistungId = leistungId;
@@ -38,6 +43,6 @@ public class Leistung implements Serializable {
 
     @Override
     public String toString() {
-        return "Leistung [id=" + leistungId + ", typ=" + typ + "]";
+        return "Leistung [leistungId=" + leistungId + ", bezeichnung=" + bezeichnung + "]";
     }
 }

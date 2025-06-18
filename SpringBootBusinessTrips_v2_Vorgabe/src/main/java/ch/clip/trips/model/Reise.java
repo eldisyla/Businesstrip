@@ -18,4 +18,14 @@ public class Reise {
 
     private LocalDate startdatum;
     private LocalDate enddatum;
+
+    public Reise() {
+    }
+
+    public Reise(String zielort, String beschreibung, LocalDate startdatum, LocalDate enddatum) {
+        this.zielort = zielort;
+        this.beschreibung = beschreibung;
+        this.startdatum = startdatum;
+        this.enddatum = enddatum;
+    }
 }
