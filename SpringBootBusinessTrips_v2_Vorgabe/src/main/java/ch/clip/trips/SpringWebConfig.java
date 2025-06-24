@@ -9,10 +9,10 @@ public class SpringWebConfig implements WebMvcConfigurer {
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        // Erlaube CORS für alle API-Endpunkte
         registry.addMapping("/**")
-                .allowedOrigins("http://localhost:3000") // oder 5173 für Vite
-                .allowedMethods("GET", "POST", "PUT", "DELETE")
-                .allowedHeaders("*");
+                .allowedOrigins("http://localhost:3000") // ggf. "http://localhost:5173" für Vite
+                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // <== OPTIONS ergänzt
+                .allowedHeaders("*")
+                .allowCredentials(true); // <== optional, wenn Cookies oder Tokens genutzt werden
     }
 }

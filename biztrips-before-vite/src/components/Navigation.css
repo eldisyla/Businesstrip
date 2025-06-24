@@ -1,0 +1,39 @@
+.main-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  background-color: #3949ab;
+  padding: 15px;
+  border-radius: 0 0 10px 10px;
+  align-items: center;
+}
+
+.main-nav a {
+  padding: 8px 14px;
+  background-color: #e8eaf6;
+  color: #1e2a78;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.main-nav a:hover {
+  background-color: #5c6bc0;
+  color: white;
+}
+
+.main-nav a.active {
+  background-color: #1e2a78;
+  color: white;
+  font-weight: bold;
+  border: 1px solid white;
+}
+
+.nav-group-label {
+  font-weight: bold;
+  color: #ffffffaa;
+  margin: 0 12px 0 0;
+  padding-right: 8px;
+  border-right: 2px solid #fff3;
+}

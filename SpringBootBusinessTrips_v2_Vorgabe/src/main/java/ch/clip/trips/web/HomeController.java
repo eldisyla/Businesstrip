@@ -8,11 +8,11 @@ public class HomeController {
 
     @GetMapping("/")
     public String status() {
-        return "✅ Backend läuft!";
+        return "Backend läuft!";
     }
 
     @GetMapping("/health")
     public String healthCheck() {
-        return "✅ Alles bereit für das Frontend!";
+        return "Alles bereit für das Frontend!";
     }
 }

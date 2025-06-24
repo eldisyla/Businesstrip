@@ -1,0 +1,91 @@
+.mitreisende-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 30px 20px;
+  background-color: #f3f4f6;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #ccc;
+}
+
+.mitreisende-container h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.mitreisende-form {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+}
+
+.mitreisende-form select,
+.mitreisende-form button {
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.mitreisende-form button {
+  background-color: #3949ab;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.mitreisende-form button:hover {
+  background-color: #303f9f;
+}
+
+.mitreisende-liste {
+  margin-top: 20px;
+}
+
+.kunde-block {
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: #fff;
+  border-left: 6px solid #3949ab;
+  border-radius: 6px;
+}
+
+.kunde-name {
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.kunde-name span {
+  font-size: 1.1rem;
+}
+
+.mitreisenden-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 10px;
+  border-bottom: 1px dashed #ccc;
+  margin-top: 4px;
+}
+
+.mitreisenden-item button {
+  background-color: #e53935;
+  color: white;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.mitreisenden-item button:hover {
+  background-color: #c62828;
+}
+
+.mitreisende-empty {
+  font-style: italic;
+  color: #777;
+  margin-left: 10px;
+}
