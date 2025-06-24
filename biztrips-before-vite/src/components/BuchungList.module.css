@@ -1,0 +1,102 @@
+/* Container für das gesamte Formular */
+.buchungList {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Titel */
+.buchungList h2 {
+  text-align: center;
+  color: #4CAF50;
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+/* Formularelemente */
+.buchungList form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Eingabefelder */
+.buchungList input[type="text"],
+.buchungList input[type="date"],
+.buchungList select {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.buchungList select {
+  cursor: pointer;
+}
+
+/* Button für die Erstellung der Buchung */
+.buchungList button[type="submit"] {
+  padding: 12px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.buchungList button[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+/* Fehlernachricht */
+.buchungList .error-message {
+  color: red;
+  font-size: 1rem;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Liste der Reisen */
+.buchungList ul {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 30px;
+}
+
+.buchungList ul li {
+  background-color: #e9f5e9;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.buchungList ul li h3 {
+  margin: 0;
+  font-size: 1.3rem;
+  color: #333;
+}
+
+.buchungList ul li p {
+  margin: 5px 0;
+  font-size: 1rem;
+  color: #666;
+}
+
+.buchungList ul li ul {
+  margin: 10px 0 10px 20px;
+}
+
+.buchungList ul li ul li {
+  font-size: 0.95rem;
+  color: #333;
+}

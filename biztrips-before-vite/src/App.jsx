@@ -1,108 +1,49 @@
 import React from "react";
+import { BrowserRouter as Router, Routes, Route, NavLink } from "react-router-dom";
+
+import Home from "./components/Home";
+import KundeList from "./components/KundeList";
+import ReiseErstellenPage from "./components/ReiseErstellenPage";
+import BuchungList from "./components/BuchungList";
+import MitreisendeList from "./components/MitreisendeList";
+
 import "./App.css";
-import Footer from "./Footer";
-import Header from "./Header";
 
-const trips = [
-  {
-    id: 1,
-    title: "BT01",
-    description: "San Francisco World Trade Center on new Server/IOT/Client ",
-    startTrip: [2021, 2, 13, 0, 0],
-    endTrip: [2021, 2, 15, 16, 56],
-    meetings: [
-      {
-        id: 1,
-        title: "One Conference",
-        description: "Key Note on One Conference",
-      },
-      {
-        id: 2,
-        title: "Zero Conference",
-        description: "Workshop Zero on One Conference",
-      },
-    ],
-  },
-  {
-    id: 2,
-    title: "BT02",
-    description: "Santa Clara Halley on new Server/IOT/Client",
-    startTrip: [2021, 6, 23, 9, 0],
-    endTrip: [2021, 6, 27, 16, 56],
-    meetings: [
-      {
-        id: 3,
-        title: "One Conference",
-        description: "HandsOn on One Conference",
-      },
-      {
-        id: 4,
-        title: "One Conference",
-        description: "Key Note on One Conference",
-      },
-    ],
-  },
-  {
-    id: 3,
-    title: "BT03",
-    description: "San Cose City Halley on Docker/IOT/Client",
-    startTrip: [2021, 12, 13, 9, 0],
-    endTrip: [2021, 12, 15, 16, 56],
-    meetings: [
-      {
-        id: 5,
-        title: "One Conference",
-        description: "Key Note on One Conference",
-      },
-    ],
-  },
-];
-
-export default function App() {
-  function renderTrip(t) {
-    return (
-      <div className="product" key={t.id}>
-        <figure>
-          <div>
-            <img src={"images/items/" + t.id + ".jpg"} alt="name " />
-          </div>
-          <figcaption>
-            <a href="#. . . ">{t.title}</a>
-            <div>
-              <span>
-                {t.startTrip[2] + "-" + t.startTrip[1] + "-" + t.startTrip[0]}
-              </span>
-            </div>
-            <p>{t.description}</p>
-            <div>
-              <button type="button" disabled>
-                Add to Triplist
-              </button>
-            </div>
-          </figcaption>
-        </figure>
-      </div>
-    );
-  }
-
+function App() {
   return (
-    <>
-      <div>
-        <Header />
-        <main>
-          <section id="filters">
-            <label htmlFor="month">Filter by Month:</label>{" "}
-            <select id="size">
-              <option value="">All months</option>
-              <option value="1">January</option>
-              <option value="2">February</option>
-              <option value="3">March</option>
-            </select>
-          </section>
-          <section id="products">{trips.map(renderTrip)}</section>
-        </main>
+    <Router>
+      <div style={{ padding: "20px", fontFamily: "Arial, sans-serif" }}>
+        <h1>BusinessTrips App</h1>
+
+        <nav className="main-nav">
+          <div className="nav-group">
+            <div className="nav-group-title">🏠 Dashboard / Start</div>
+            <NavLink to="/" end className={({ isActive }) => (isActive ? "active" : "")}>Home</NavLink>
+          </div>
+
+          <div className="nav-group">
+            <div className="nav-group-title">🔹 Personenverwaltung</div>
+            <NavLink to="/kunden" className={({ isActive }) => (isActive ? "active" : "")}>👤 Kunden</NavLink>
+            <NavLink to="/mitreisende" className={({ isActive }) => (isActive ? "active" : "")}>🤝 Mitreisende</NavLink>
+          </div>
+
+          <div className="nav-group">
+            <div className="nav-group-title">🔹 Reiseplanung & Verwaltung</div>
+            <NavLink to="/reisen" className={({ isActive }) => (isActive ? "active" : "")}>🌍 Reisen</NavLink>
+            <NavLink to="/buchungen" className={({ isActive }) => (isActive ? "active" : "")}>🧾 Buchungen</NavLink>
+          </div>
+        </nav>
+
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/kunden" element={<KundeList />} />
+          <Route path="/reisen" element={<ReiseErstellenPage />} />
+          <Route path="/buchungen" element={<BuchungList />} />
+          <Route path="/mitreisende" element={<MitreisendeList />} />
+        </Routes>
       </div>
-      <Footer />
-    </>
+    </Router>
   );
 }
+
+export default App;
